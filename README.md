@@ -86,16 +86,14 @@ If two events occur at the same time, the one that was created last is displayed
 
 <br>
 
-<b>The following types of testing will be introduced:</b><br>
+<h3>The following types of testing will be introduced:</h3><br>
 <ul>
 <li> Functional (at the system level, at the integration level, at the component level) </li>
 <li> UX/UI </li>
 <li> API Testing </li>
-</ul>
-
-<br>
+</ul><br>
  
-<b> Functional and non-functional testing: </b>
+<h3> Functional and non-functional testing: </h3>
 <details><summary> 1. Testing personal events: </summary><br>
  
 <details><summary>Test case: Qase.io screenshots</summary><br>
@@ -142,8 +140,70 @@ If two events occur at the same time, the one that was created last is displayed
   
 </details>
 
-2. Regression testing: <br>
-Check-list: [GoogleForms](https://docs.google.com/spreadsheets/d/11lGdAUcPdgT6_QC5UakRav8jw0p9qTYpEZXBPFVAcd8/edit?usp=sharing)
+2. Regression testing: Check-list: [GoogleForms](https://docs.google.com/spreadsheets/d/11lGdAUcPdgT6_QC5UakRav8jw0p9qTYpEZXBPFVAcd8/edit?usp=sharing)
 
+<details><summary> 3. Smoke testing </summary><br>
+ 
+<details><summary> Test case </summary><br>
 
+![image](https://user-images.githubusercontent.com/115921753/202216191-f27a9591-e02d-4902-b9b3-36f6855f7b14.png)
 
+![image](https://user-images.githubusercontent.com/115921753/202216392-a1697d1d-a979-4115-aea9-cb4bff62a53d.png)
+
+![image](https://user-images.githubusercontent.com/115921753/202216488-6468e6b0-c052-4604-aa10-92777d2084c9.png)
+ 
+</details>
+ 
+<details><summary> Test run </summary><br>
+
+![image](https://user-images.githubusercontent.com/115921753/202216614-058c5dc0-9d57-412d-9f21-8b4ee9a2f1b3.png)
+
+</details>
+
+</details>
+
+<details><summary> 4. Acceptance testing: </summary><br>
+ 
+![image](https://user-images.githubusercontent.com/115921753/202217490-94eca83a-da1a-4864-ad3c-47b18a4d74ac.png)
+
+</details>
+
+<br>
+ 
+<h3> Product decomposition: </h3>
+
+<b> Mindmap: </b> [Miro](https://miro.com/app/board/uXjVOynerHE=/?share_link_id=275660923440) 
+
+<br>
+ 
+<h3> Test schedule </h3>
+ 
+| Types of testing | Testing dates |
+| ----------- | ----------- |
+| Functional testing | 22.05-29.05 |
+| UI/UX | 22.05-29.05 |
+| API Testing | 29.05-1.06 |
+
+<br>
+
+<h3> Test results </h3>
+
+<details><summary> Bug reports on new functionality: </summary><br>
+ 
+![image](https://user-images.githubusercontent.com/115921753/202223196-bdbeab79-3a13-4e58-98d1-542498598472.png)
+
+![image](https://user-images.githubusercontent.com/115921753/202223307-f75d1c99-4e27-4c7a-9b8d-c6e585dfb27f.png)
+
+![image](https://user-images.githubusercontent.com/115921753/202223400-0e6d4dc6-b231-4ab4-bae0-a90548f57d67.png)
+ 
+</details>
+
+<br>
+
+<h3> Final Project Testing Report </h3>
+
+A total of 28 hours were spent on testing the new calendar element “Personal Events“, developing a text plan, test cases and creating a report. Two bugs were found, one of which needs to be fixed as soon as possible to ensure the convenience of using the new calendar functionality.
+
+When testing the API, no critical errors were detected, all events are created, edited and deleted correctly. There is a minor bug when deleting a non-existent event - the status 200 is returned.
+
+The new functionality is ready for release, subject to the prompt elimination of the existing bug with the transfer of a personal event. It does not affect the functionality, because it remains possible to delete an existing personal event and create it again on the required date, it only affects the usability of the new function. You should also replace the date selection from the drop-down list with the date selection from the drop-down calendar.
