@@ -1,0 +1,1016 @@
+{
+	"info": {
+		"_postman_id": "cabe7feb-dcbc-429c-be03-a4c673a6d3fc",
+		"name": "Events",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21684178"
+	},
+	"item": [
+		{
+			"name": "Проверка основного функционала",
+			"item": [
+				{
+					"name": "Создание личного события в настоящем",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"presEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"LATIN 1234\",\r\n    \"title\": \"Кирилица пробел\",\r\n    \"startAt\": \"{{startDate}}\",\r\n    \"endAt\": \"{{endDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/createPersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование личного события и перенос в прошлое",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"pastEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"# кирилица1+latin\",\r\n    \"title\": \"Latin _(3)?\",\r\n    \"startAt\": \"{{startDatePast}}\",\r\n    \"endAt\": \"{{endDatePast}}\",\r\n    \"id\": {{presEventId}},\r\n    \"oldStartAt\": \"{{startDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление личного события из прошлого",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Event deleted\", function () { \r",
+									"    pm.expect(pm.response.json().errors).to.equal(null); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{pastEventId}},\r\n    \"startAt\": \"{{startDatePast}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/removePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Корректное создание личного события в разном временном диапазоне",
+			"item": [
+				{
+					"name": "Создание личного события в прошлом + цвет по умолчанию",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"pastEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#D478F1\",\r\n    \"description\": \"MAKE NO MISTAKE\",\r\n    \"title\": \"Learn English!!\",\r\n    \"startAt\": \"{{startDatePast}}\",\r\n    \"endAt\": \"{{endDatePast}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/createPersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание личного события в будущем + ссылка в описании",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"futrEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#81888D\",\r\n    \"description\": \"https://teachers.skyeng.ru/schedule\",\r\n    \"title\": \"ВНИМАНИЕ!\",\r\n    \"startAt\": \"{{startDateFuture}}\",\r\n    \"endAt\": \"{{endDateFuture}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/createPersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание личного события в настоящем + заголовок на 40 символов",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"presEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"1234\",\r\n    \"title\": \"Большой заголовок для проверки личного С\",\r\n    \"startAt\": \"{{startDate}}\",\r\n    \"endAt\": \"{{endDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/createPersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Некорректное создание личного события",
+			"item": [
+				{
+					"name": "Создание личного события с некорректной датой",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"1234\",\r\n    \"title\": \"ммс\",\r\n    \"startAt\": \"2022-08-32T00:00:00+03:00\",\r\n    \"endAt\": \"2022-08-32T00:30:00+03:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/createPersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание личного события с незаполненной датой",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"1234\",\r\n    \"title\": \"ммс\",\r\n    \"startAt\": \"00:00+03:00\",\r\n    \"endAt\": \"30:00+03:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/createPersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание личного события в описании которого более 500 символов",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"501кйцукйцукйцукцуйкйцукцукцйукцйулркгйрцушкгйцуашгвпанывагшйцнкгшрцоулрлгргпвашфыпвшсмгнпячшмрывфлаопгйцкшйцункшгрвалофыврлаорцйугкнщйнзафщывраоляыоарлрпфцукгшцйнрзкржолдыражячсммжъхзфшйъхцшуджкойлцоклоьбртоячримолфрывайцзушкодалолтмочсирморщшщхуржлйцкйайцукйцукйцукйцукцуйкйцукцукцйукцйулркгйрцушкгйцуашгвпанывагшйцнкгшрцоулрлгргпвашфыпвшсмгнпячшмрывфлаопгйцкшйцункшгрвалофыврлаорцйугкнщйнзафщывраоляыоарлрпфцукгшцйнрзкржолдыражячсммжъхзфшйъхцшуджкойлцоклоьбртоячримолфрывайцзушкодалолтмочсирморщ501\",\r\n    \"title\": \"ммс\",\r\n    \"startAt\": \"{{startDate}}\",\r\n    \"endAt\": \"{{endDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/createPersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Перенос личного событиия в разном временном диапазоне",
+			"item": [
+				{
+					"name": "Перенос ЛС из настоящего в прошлое",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"pastEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"12341\",\r\n    \"title\": \"ммс1\",\r\n    \"startAt\": \"{{startDatePast}}\",\r\n    \"endAt\": \"{{endDatePast}}\",\r\n    \"id\": {{presEventId}},\r\n    \"oldStartAt\": \"{{startDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Перенос ЛС из настоящего в  будущее",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"futrEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"12341\",\r\n    \"title\": \"ммс1\",\r\n    \"startAt\": \"{{startDateFuture}}\",\r\n    \"endAt\": \"{{endDateFuture}}\",\r\n    \"id\": {{presEventId}},\r\n    \"oldStartAt\": \"{{startDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Перенос ЛС из будущего в прошлое",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"pastEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"12341\",\r\n    \"title\": \"ммс1\",\r\n    \"startAt\": \"{{startDatePast}}\",\r\n    \"endAt\": \"{{endDatePast}}\",\r\n    \"id\": {{futrEventId}},\r\n    \"oldStartAt\": \"{{startDateFuture}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Перенос ЛС из будущего в настоящее",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"presEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"12341\",\r\n    \"title\": \"ммс1\",\r\n    \"startAt\": \"{{startDate}}\",\r\n    \"endAt\": \"{{endDate}}\",\r\n    \"id\": {{futrEventId}},\r\n    \"oldStartAt\": \"{{startDateFuture}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Перенос ЛС из прошлого в будущее",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"futrEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"12341\",\r\n    \"title\": \"ммс1\",\r\n    \"startAt\": \"{{startDateFuture}}\",\r\n    \"endAt\": \"{{endDateFuture}}\",\r\n    \"id\": {{pastEventId}},\r\n    \"oldStartAt\": \"{{startDatePast}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Перенос ЛС из прошлого в настоящее",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"presEventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"pm.collectionVariables.set(key, value); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"12341\",\r\n    \"title\": \"ммс1\",\r\n    \"startAt\": \"{{startDate}}\",\r\n    \"endAt\": \"{{endDate}}\",\r\n    \"id\": {{pastEventId}},\r\n    \"oldStartAt\": \"{{startDatePast}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Удаление личного события в разном временном диапазоне",
+			"item": [
+				{
+					"name": "Удаление личного события из прошлого",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Event deleted\", function () { \r",
+									"    pm.expect(pm.response.json().errors).to.equal(null); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{pastEventId}},\r\n    \"startAt\": \"{{startDatePast}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/removePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление личного события из настоящего",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Event deleted\", function () { \r",
+									"    pm.expect(pm.response.json().errors).to.equal(null); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{presEventId}},\r\n    \"startAt\": \"{{startDate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/removePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление личного события из будущего",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Event deleted\", function () { \r",
+									"    pm.expect(pm.response.json().errors).to.equal(null); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{myToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{futrEventId}},\r\n    \"startAt\": \"{{startDateFuture}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{skyeng}}/v2/schedule/removePersonal",
+							"host": [
+								"{{skyeng}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var moment = require('moment');",
+					"",
+					"var startDate = moment().hours(21).minutes(00).seconds(00);",
+					"var endDate = moment(startDate).add(30, \"minutes\");",
+					"pm.globals.set(\"startDate\", startDate.format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
+					"pm.globals.set(\"endDate\", endDate.format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
+					"",
+					"var startDatePast = moment(startDate).subtract(1, \"days\");",
+					"var endDatePast = moment(startDatePast).add(30, \"minutes\");",
+					"pm.globals.set(\"startDatePast\", startDatePast.format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
+					"pm.globals.set(\"endDatePast\", endDatePast.format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
+					"",
+					"var startDateFuture = moment(startDate).add(1, \"days\");",
+					"var endDateFuture = moment(startDateFuture).add(30, \"minutes\");",
+					"pm.globals.set(\"startDateFuture\", startDateFuture.format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
+					"pm.globals.set(\"endDateFuture\", endDateFuture.format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
+					"",
+					"var minuteBeforeMidnight = moment().hours(23).minutes(59).seconds(00);",
+					"var Midnight = moment().hours(00).minutes(00).seconds(00);",
+					"pm.globals.set(\"minuteBeforeMidnight\", minuteBeforeMidnight.format(\"YYYY-MM-DDTHH:mm:ssZ\"));",
+					"pm.globals.set(\"Midnight\", Midnight.format(\"YYYY-MM-DDTHH:mm:ssZ\"));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "myToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "skyeng",
+			"value": "https://api-teachers.skyeng.ru",
+			"type": "string"
+		},
+		{
+			"key": "pastEventId",
+			"value": ""
+		},
+		{
+			"key": "presEventId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "futrEventId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

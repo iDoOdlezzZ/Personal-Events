@@ -1,0 +1,507 @@
+{
+	"id": "83d28db1-beac-4415-9743-0a3f5866af24",
+	"name": "Events",
+	"timestamp": "2022-11-15T15:37:14.986Z",
+	"collection_id": "21684178-cabe7feb-dcbc-429c-be03-a4c673a6d3fc",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 19,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "217ae2bb-7b86-4431-bcf0-cda2f784d049",
+			"name": "Создание личного события в настоящем",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/createPersonal",
+			"time": 642,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				642
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "5f7c89d9-36fe-409c-92cf-ce9f9abe43e1",
+			"name": "Редактирование личного события и перенос в прошлое",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/updatePersonal",
+			"time": 312,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				312
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "26940a03-e5d3-44e6-8f45-b61d95a23d8a",
+			"name": "Удаление личного события из прошлого",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/removePersonal",
+			"time": 231,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Event deleted": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				231
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Event deleted": true
+				}
+			]
+		},
+		{
+			"id": "8ec8ff9c-0bbc-416c-829c-ba68e21447e4",
+			"name": "Создание личного события в будущем + ссылка в описании",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/createPersonal",
+			"time": 195,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				195
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "961e0ef1-8fda-4ed7-8b36-6813eaff9f56",
+			"name": "Перенос ЛС из будущего в настоящее",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/updatePersonal",
+			"time": 235,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				235
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "df1a2d46-c78f-47f4-b8ce-d9e6527ddbef",
+			"name": "Удаление личного события из настоящего",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/removePersonal",
+			"time": 249,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Event deleted": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				249
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Event deleted": true
+				}
+			]
+		},
+		{
+			"id": "a2e41709-b12a-4f39-87dc-8c541fb364e5",
+			"name": "Создание личного события в настоящем + заголовок на 40 символов",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/createPersonal",
+			"time": 287,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				287
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "a6671e68-f2c0-4747-98e5-60964d1018df",
+			"name": "Перенос ЛС из настоящего в прошлое",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/updatePersonal",
+			"time": 223,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				223
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "a7bc53fd-d1aa-424e-b9da-23d590f45d29",
+			"name": "Удаление личного события из прошлого",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/removePersonal",
+			"time": 175,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Event deleted": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				175
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Event deleted": true
+				}
+			]
+		},
+		{
+			"id": "ab47693e-0ff1-4285-8749-8de537b5afa7",
+			"name": "Создание личного события в прошлом + цвет по умолчанию",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/createPersonal",
+			"time": 185,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				185
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "62bc9825-206d-41db-8cf7-1b48fe8724a7",
+			"name": "Перенос ЛС из прошлого в будущее",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/updatePersonal",
+			"time": 234,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				234
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "a02d7021-fb58-4f52-a6dd-520d44264851",
+			"name": "Удаление личного события из будущего",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/removePersonal",
+			"time": 205,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Event deleted": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				205
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Event deleted": true
+				}
+			]
+		},
+		{
+			"id": "a8fd98a8-cbab-4594-9f35-279252a265b2",
+			"name": "Создание личного события с некорректной датой",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/createPersonal",
+			"time": 89,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				89
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "9b20f5d2-5bfa-44a1-b323-3d52fbc2a83b",
+			"name": "Создание личного события с незаполненной датой",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/createPersonal",
+			"time": 93,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				93
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "f7588ff6-1cf9-4bbc-828a-78025f402577",
+			"name": "Создание личного события в описании которого более 500 символов",
+			"url": "https://api-teachers.skyeng.ru/v2/schedule/createPersonal",
+			"time": 115,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				115
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 3470,
+	"collection": {
+		"requests": [
+			{
+				"id": "217ae2bb-7b86-4431-bcf0-cda2f784d049",
+				"method": "POST"
+			},
+			{
+				"id": "5f7c89d9-36fe-409c-92cf-ce9f9abe43e1",
+				"method": "POST"
+			},
+			{
+				"id": "26940a03-e5d3-44e6-8f45-b61d95a23d8a",
+				"method": "POST"
+			},
+			{
+				"id": "8ec8ff9c-0bbc-416c-829c-ba68e21447e4",
+				"method": "POST"
+			},
+			{
+				"id": "961e0ef1-8fda-4ed7-8b36-6813eaff9f56",
+				"method": "POST"
+			},
+			{
+				"id": "df1a2d46-c78f-47f4-b8ce-d9e6527ddbef",
+				"method": "POST"
+			},
+			{
+				"id": "a2e41709-b12a-4f39-87dc-8c541fb364e5",
+				"method": "POST"
+			},
+			{
+				"id": "a6671e68-f2c0-4747-98e5-60964d1018df",
+				"method": "POST"
+			},
+			{
+				"id": "a7bc53fd-d1aa-424e-b9da-23d590f45d29",
+				"method": "POST"
+			},
+			{
+				"id": "ab47693e-0ff1-4285-8749-8de537b5afa7",
+				"method": "POST"
+			},
+			{
+				"id": "62bc9825-206d-41db-8cf7-1b48fe8724a7",
+				"method": "POST"
+			},
+			{
+				"id": "a02d7021-fb58-4f52-a6dd-520d44264851",
+				"method": "POST"
+			},
+			{
+				"id": "a8fd98a8-cbab-4594-9f35-279252a265b2",
+				"method": "POST"
+			},
+			{
+				"id": "9b20f5d2-5bfa-44a1-b323-3d52fbc2a83b",
+				"method": "POST"
+			},
+			{
+				"id": "f7588ff6-1cf9-4bbc-828a-78025f402577",
+				"method": "POST"
+			}
+		]
+	}
+}
